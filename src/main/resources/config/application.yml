@@ -1,0 +1,41 @@
+spring:
+    application:
+        name: wiseup
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        username: ${SPRING_DATASOURCE_USERNAME}
+        password: ${SPRING_DATASOURCE_PASSWORD}
+        url: ${SPRING_DATASOURCE_URL}
+    jpa:
+        properties.hibernate.generate_statistics: false
+        hibernate:
+            ddl-auto: none
+        database: POSTGRESQL
+        properties:
+            hibernate:
+                default_schema: wiseup
+                session:
+                    events:
+                        log: false
+    liquibase.enabled: true
+    mvc:
+        pathmatch:
+            matching-strategy: ant_path_matcher
+
+liquibase.default.db.schema: "wiseup"
+
+jhipster:
+    security:
+        authentication:
+            jwt:
+                secret: my-secret-token-to-change-in-production
+                token-validity-in-seconds: 86400
+
+logging:
+    level:
+        ROOT: INFO
+        org.hibernate: WARN
+
+server:
+    port: 3737
+

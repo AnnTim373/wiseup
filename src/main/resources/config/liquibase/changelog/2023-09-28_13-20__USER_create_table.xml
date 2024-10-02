@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="1" author="timofeeva">
+        <createSequence schemaName="wiseup"
+                        sequenceName="seq_user"
+                        startValue="1"
+                        incrementBy="1"/>
+
+        <createTable schemaName="wiseup" tableName="user" remarks="Учетные записи пользователей">
+            <column name="id" type="bigint" remarks="Идентификатор учетной записи"
+                    defaultValueComputed="nextval('wiseup.seq_user')">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="login" type="varchar" remarks="Логин пользователя"/>
+            <column name="password" type="varchar" remarks="Пароль пользователя"/>
+        </createTable>
+
+        <addNotNullConstraint schemaName="wiseup" tableName="user" columnName="login"/>
+        <addUniqueConstraint schemaName="wiseup" tableName="user" columnNames="login"/>
+        <addNotNullConstraint schemaName="wiseup" tableName="user" columnName="password"/>
+    </changeSet>
+
+</databaseChangeLog>
